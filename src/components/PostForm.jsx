@@ -1,9 +1,10 @@
 import { useState, useContext } from 'react'
-import { PostContext, UsernameContext } from '../App'
+import { PostContext, UserContext } from '../App'
 
 export default function PostForm() {
     const { fetchPosts } = useContext(PostContext)
-    const { username } = useContext(UsernameContext)
+    const { username, loggedInUser } = useContext(UserContext)
+    const initials = `${loggedInUser.firstName?.charAt(0).toUpperCase()} ${loggedInUser.lastName?.charAt(0).toUpperCase()}`
     const initialState = {
         title: "",
         content: "",
@@ -42,6 +43,9 @@ export default function PostForm() {
 
     return (
         <form className="post-form" onSubmit={handleSubmit}>
+            <div className="circle">
+                <span>{initials}</span>
+            </div>
             <input 
                 name="title"
                 type="text"

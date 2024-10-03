@@ -1,8 +1,9 @@
 import { useEffect, useState, useContext } from 'react';
-import { UsernameContext } from '../App'
+import { UserContext } from '../App'
 
 export default function AuthorDetails({ contactId }) {
-    const { username } = useContext(UsernameContext)
+    const { username, loggedInUser } = useContext(UserContext)
+    const initials = `${loggedInUser.firstName?.charAt(0).toUpperCase()} ${loggedInUser.lastName?.charAt(0).toUpperCase()}`
     const [author, setAuthor] = useState({})
     const authorUrl = `https://boolean-uk-api-server.fly.dev/${username}/contact/${contactId}`
 
@@ -10,14 +11,16 @@ export default function AuthorDetails({ contactId }) {
         const fetchAuthor = async () => {
             const response = await fetch(authorUrl)
             const jsonData = await response.json()
-            setAuthor(jsonData);
+            setAuthor(jsonData)
         };
-        fetchAuthor();
-    }, [contactId]);
+        fetchAuthor()
+    }, [contactId])
 
     return (
         <div className="author-details">
-            <span className="author-initials">{author.firstName?.charAt(0).toUpperCase()} {author.lastName?.charAt(0).toUpperCase()}</span>
+            <div className="circle">
+                <span>{initials}</span>
+            </div>
             <h4>{author.firstName} {author.lastName}</h4>
         </div>
     )

@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react'
-import { PostContext, UsernameContext } from '../App'
+import { PostContext, UserContext } from '../App'
 
 export default function CommentForm({ postId }) {
     const { fetchPosts } = useContext(PostContext)
-    const { username } = useContext(UsernameContext)
+    const { username } = useContext(UserContext)
     const initialState = {
         postId: 0,
         content: "",

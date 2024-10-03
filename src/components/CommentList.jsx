@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import Comment from './Comment'
 import { useContext } from 'react'
-import { UsernameContext } from '../App'
+import { UserContext } from '../App'
 
 export default function CommentList({ postId }) {
-    const { username } = useContext(UsernameContext)
+    const { username } = useContext(UserContext)
     const [comments, setComments] = useState([])
     const [showAllComments, setShowAllComments] = useState(false)
     const commentsUrl = `https://boolean-uk-api-server.fly.dev/${username}/post/${postId}/comment`
