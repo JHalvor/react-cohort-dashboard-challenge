@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react'
 import CommentList from './CommentList'
 import AuthorDetails from './AuthorDetails'
-import { useParams } from "react-router-dom";
-import { PostContext } from '../App'
+import { PostContext } from '../App';
+import CommentForm from './CommentForm'
 
 export default function Post({ post }) {
     const { id } = useParams()
@@ -24,11 +24,16 @@ export default function Post({ post }) {
     return (
         <div className="post">
             <AuthorDetails contactId={post.contactId} />
-            <h2>
-                <Link to={`/post/${post.id}`}>{post.title}</Link>
-            </h2>
-            <p>{post.body}</p>
-            <CommentList postId={post.id} />
+            <div className="post-content">
+                <Link to={`/post/${post.id}`}>
+                    <h3>{post.title}</h3>
+                    <p>{post.content}</p>
+                </Link>
+            </div>
+            <div className="post-comments">
+                <CommentList postId={post.id} />
+            </div>
+            <CommentForm postId={post.id} />
         </div>
     )
 }

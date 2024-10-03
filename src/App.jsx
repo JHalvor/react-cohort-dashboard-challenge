@@ -18,7 +18,6 @@ export default function App() {
     setLoading(true)
     const response = await fetch(url)
     const jsonData = await response.json()
-    //console.log(jsonData)
     setPosts(jsonData)
     setLoading(false)
   }
@@ -33,7 +32,6 @@ export default function App() {
             value={{
               username: username
             }}>
-
               <PostContext.Provider
                 value={{
                   posts: posts,

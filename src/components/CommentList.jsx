@@ -9,13 +9,10 @@ export default function CommentList({ postId }) {
     const [showAllComments, setShowAllComments] = useState(false)
     const commentsUrl = `https://boolean-uk-api-server.fly.dev/${username}/post/${postId}/comment`
     
-
     useEffect(() => {
         const fetchComments = async () => {
         const response = await fetch(commentsUrl)
         const jsonData = await response.json()
-        console.log("CommentList - commentsUrl: ", commentsUrl)
-        console.log("CommentList - jsonData: ", jsonData)
         setComments(jsonData)
         }
         fetchComments()
@@ -27,14 +24,13 @@ export default function CommentList({ postId }) {
     
     return (
         <div className="comment-list">
-        {comments.slice(0, showAllComments ? comments.length : 3).map(comment => (
-            <Comment key={comment.id} comment={comment} />
-        ))}
         {comments.length > 3 && (
             <button onClick={toggleComments}>
-            {showAllComments ? 'See less comments' : 'See previous comments'}
-            </button>
-        )}
+                {showAllComments ? 'See less comments' : 'See previous comments'}
+            </button>)}
+
+        {comments.slice(0, showAllComments ? comments.length : 3).map(comment => (
+            <Comment key={comment.id} comment={comment} />))}
         </div>
     )
 }

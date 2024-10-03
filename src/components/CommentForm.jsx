@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react'
 import { PostContext, UsernameContext } from '../App'
 
-export default function PostForm() {
+export default function CommentForm({ postId }) {
     const { fetchPosts } = useContext(PostContext)
     const { username } = useContext(UsernameContext)
     const initialState = {
-        title: "",
+        postId: 0,
         content: "",
         contactId: 0
     }
@@ -30,32 +30,26 @@ export default function PostForm() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-                title: formData.title, 
+                postId: postId, 
                 content: formData.content, 
                 contactId: formData.contactId })
         }
 
-        await fetch(`https://boolean-uk-api-server.fly.dev/${username}/post`, requestOptions)
+        await fetch(`https://boolean-uk-api-server.fly.dev/${username}/post/${postId}/comment`, requestOptions)
         setFormData(initialState)
         fetchPosts()
     }
 
     return (
-        <form className="post-form" onSubmit={handleSubmit}>
+        <form className="comment-form" onSubmit={handleSubmit}>
             <input 
-                name="title"
-                type="text"
-                value={formData.title}
-                onChange={handleChange}
-                placeholder="Title"
-                required/>
-            <textarea 
                 name="content"
+                type="text"
                 value={formData.content}
                 onChange={handleChange}
-                placeholder="What's on your mind?"
+                placeholder="Add a comment..."
                 required/>
-            <button type="submit">Post</button>
+            <button type="submit">Post comment</button>
         </form>
     )
 }
