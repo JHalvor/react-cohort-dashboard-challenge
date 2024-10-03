@@ -1,13 +1,13 @@
 import { Link, useParams } from 'react-router-dom'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import CommentList from './CommentList'
 import AuthorDetails from './AuthorDetails'
-import { PostContext } from '../App';
 import CommentForm from './CommentForm'
+import { usePost } from '../context/PostContext'
 
 export default function Post({ post }) {
     const { id } = useParams()
-    const { posts } = useContext(PostContext)
+    const { posts } = usePost()
     const [postState, setPostState] = useState(null)
 
     useEffect(() => {

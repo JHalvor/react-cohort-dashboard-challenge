@@ -1,9 +1,10 @@
-import { useState, useContext } from 'react'
-import { PostContext, UserContext } from '../App'
+import { useState } from 'react'
+import { useUser } from "../context/UserContext"
+import { usePost } from "../context/PostContext"
 
 export default function CommentForm({ postId }) {
-    const { fetchPosts } = useContext(PostContext)
-    const { username } = useContext(UserContext)
+    const { fetchPosts, fetchRandomContact } = usePost()
+    const { username } = useUser()
     const initialState = {
         postId: 0,
         content: "",
@@ -20,11 +21,7 @@ export default function CommentForm({ postId }) {
     const handleSubmit = async (event) => {
         event.preventDefault()
 
-        const contactsUrl = `https://boolean-uk-api-server.fly.dev/${username}/contact/`
-        const response = await fetch(contactsUrl)
-        const jsonData = await response.json()
-        const randomContactIndex = Math.floor(Math.random() * ((jsonData.length - 1)))
-        formData.contactId = jsonData[randomContactIndex].id
+        formData.contactId = fetchRandomContact().id
 
         const requestOptions = {
             method: 'POST',

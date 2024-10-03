@@ -1,9 +1,8 @@
-import { useContext } from "react"
-import titleHeader from "../assets/title-header.svg"
-import { UserContext } from "../App"
+import titleHeader from '../assets/title-header.svg'
+import { useUser } from '../context/UserContext'
 
 export default function TopHeader() {
-    const { loggedInUser } = useContext(UserContext)
+    const { loggedInUser } = useUser()
     const initials = `${loggedInUser.firstName?.charAt(0).toUpperCase()} ${loggedInUser.lastName?.charAt(0).toUpperCase()}`
     
     return(
