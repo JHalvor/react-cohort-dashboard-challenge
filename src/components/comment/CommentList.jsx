@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Comment from './Comment'
-import { useUser } from "../context/UserContext"
+import { useUser } from "../../contexts/UserContext"
 
 export default function CommentList({ postId }) {
     const { username } = useUser()

@@ -22,7 +22,9 @@ export const UserProvider = ({ children }) => {
         const response = await fetch(contactsUrl)
         const jsonData = await response.json()
         const randomContactIndex = getRandomInt(0, jsonData.length)
-        setLoggedInUser(jsonData[randomContactIndex])
+        const newLoggedInUser = jsonData[randomContactIndex]
+        newLoggedInUser.initials = `${newLoggedInUser.firstName?.charAt(0).toUpperCase()} ${newLoggedInUser.lastName?.charAt(0).toUpperCase()}`
+        setLoggedInUser(newLoggedInUser)
     }
 
     const fetchRandomContact = () => {

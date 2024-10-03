@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { usePost } from '../context/PostContext'
+import { usePost } from '../../contexts/PostContext'
 import Post from './Post'
 import PostForm from './PostForm'
 

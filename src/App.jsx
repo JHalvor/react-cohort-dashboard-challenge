@@ -1,22 +1,20 @@
 import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import PostFeed from './components/PostFeed'
+import PostFeed from './components/post/PostFeed'
 import ProfilePage from './components/ProfilePage'
-import Post from './components/Post'
+import Post from './components/post/Post'
 import TopHeader from './components/TopHeader'
 import NavigationMenu from './components/NavigationMenu'
-import { PostProvider } from './context/PostContext'
-import { useUser } from './context/UserContext'
+import { PostProvider } from './contexts/PostContext'
+import { useUser } from './contexts/UserContext'
 
 export default function App() {
-  const { fetchLoggedInUser, fetchContacts, loggedInUser } = useUser()
+  const { fetchLoggedInUser, fetchContacts } = useUser()
 
   useEffect(() => {
     fetchContacts()
     fetchLoggedInUser()
   }, [])
-
-  console.log(loggedInUser)
 
   return (
     <div className="main-layout">

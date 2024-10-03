@@ -1,9 +1,8 @@
 import titleHeader from '../assets/title-header.svg'
-import { useUser } from '../context/UserContext'
+import { useUser } from '../contexts/UserContext'
 
 export default function TopHeader() {
     const { loggedInUser } = useUser()
-    const initials = `${loggedInUser.firstName?.charAt(0).toUpperCase()} ${loggedInUser.lastName?.charAt(0).toUpperCase()}`
     
     return(
         <div className="top-header">
@@ -13,7 +12,7 @@ export default function TopHeader() {
             </div>
             <div className="profile-icon">
                 <div className="circle">
-                    <span>{initials}</span>
+                    <span>{loggedInUser.initials}</span>
                 </div>
             </div>
         </div>

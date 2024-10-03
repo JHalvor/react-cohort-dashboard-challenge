@@ -1,4 +1,4 @@
-import AuthorDetails from './AuthorDetails'
+import AuthorDetails from '../AuthorDetails'
 
 export default function Comment({ comment }) {
     return (

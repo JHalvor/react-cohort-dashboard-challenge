@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { useUser } from "../context/UserContext"
-import { usePost } from "../context/PostContext"
+import { useUser } from '../../contexts/UserContext'
+import { usePost } from '../../contexts/PostContext'
 
-export default function CommentForm({ postId }) {
-    const { fetchPosts, fetchRandomContact } = usePost()
-    const { username } = useUser()
+export default function PostForm() {
+    const { fetchPosts } = usePost()
+    const { username, loggedInUser, fetchRandomContact } = useUser()
     const initialState = {
-        postId: 0,
+        title: "",
         content: "",
         contactId: 0
     }
@@ -20,33 +20,41 @@ export default function CommentForm({ postId }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-
         formData.contactId = fetchRandomContact().id
 
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-                postId: postId, 
+                title: formData.title, 
                 content: formData.content, 
                 contactId: formData.contactId })
         }
 
-        await fetch(`https://boolean-uk-api-server.fly.dev/${username}/post/${postId}/comment`, requestOptions)
+        await fetch(`https://boolean-uk-api-server.fly.dev/${username}/post`, requestOptions)
         setFormData(initialState)
         fetchPosts()
     }
 
     return (
-        <form className="comment-form" onSubmit={handleSubmit}>
+        <form className="post-form" onSubmit={handleSubmit}>
+            <div className="circle">
+                <span>{loggedInUser.initials}</span>
+            </div>
             <input 
-                name="content"
+                name="title"
                 type="text"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="Title"
+                required/>
+            <textarea 
+                name="content"
                 value={formData.content}
                 onChange={handleChange}
-                placeholder="Add a comment..."
+                placeholder="What's on your mind?"
                 required/>
-            <button type="submit">Post comment</button>
+            <button type="submit">Post</button>
         </form>
     )
 }
