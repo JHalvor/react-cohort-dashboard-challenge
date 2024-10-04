@@ -1,3 +1,7 @@
+.body {
+  background-color: #F0F5FA;
+}
+
 .top-header {
   background-color: #000046;
   color: #fff;
@@ -11,10 +15,45 @@
   flex-grow: 1;
 }
 
-.circle span {
+.author-details {
+  display: flex;
+  align-items: center;
+}
+
+.author-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.author-link h4 {
+  margin-left: 15px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.initials-circle {
+  width: 50px;
+  height: 50px;
   color: white;
-  font-size: 18px;
-} 
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.initials-circle a {
+  color: white;
+  text-decoration: none;
+}
+
+.initials-circle a:hover {
+  text-decoration: none;
+}
+
 
 .navigation-menu {
   background-color: #fff;
@@ -33,74 +72,167 @@
   padding: 1rem 2rem;
 }
 
-.post-feed {
-  border: 1px solid #ddd;
-  padding: 1rem;
-}
-
-.post-feed h1 {
-  margin-bottom: 1rem;
-  color: #64648c;
-}
-
-.post {
-  border-bottom: 1px solid #ddd;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-
-.post h2 {
-  margin-bottom: 0.5rem;
-  color: #64648c;
-}
-
-.post p {
-  margin-bottom: 1rem;
-}
-
 .post-form {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.post-form input,
-.post-form textarea {
-  padding: 0.7rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+.post-form .post-text-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-form input.post-title, 
+.post-form textarea.post-content {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
   background-color: #e6ebf5;
 }
 
-.post-form textarea {
-  height: 100px;
+.post-form textarea.post-content {
+  resize: vertical;
+  min-height: 100px;
 }
 
 .post-form button {
-  background-color: #000046;
-  color: #fff;
-  padding: 0.7rem 1rem;
+  padding: 10px 15px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  background-color: #000046;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  height: auto;
+  align-self: stretch;
+  margin-left: 15px;
 }
 
 .post-form button:hover {
   background-color: #64dc78;
 }
 
-.comment-list {
-  margin-bottom: 1rem;
+.post {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.post-content {
+  margin-bottom: 15px;
+}
+
+.post-content h3 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+  color: #64648c;
+}
+
+.post-content p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.post-content a {
+  text-decoration: none;
+}
+
+.post-content a:hover h3 {
+  color: #64dc78;
+}
+
+.post-comments {
+  margin-top: 15px;
 }
 
 .comment {
   display: flex;
-  margin-bottom: 0.5rem;
   align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e6e6e6;
 }
 
-.author-details {
-  margin-right: 1rem;
+.comment p {
+  margin-left: 10px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.comment-form {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #e6ebf5;
+}
+
+.comment-form button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #000046;
+  color: white;
+  cursor: pointer;
+}
+
+.comment-form button:hover {
+  background-color: #64dc78;
+}
+
+.profile-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.account-info,
+.address-info,
+.company-info {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+button {
+  grid-column: span 3;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #000046;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #64dc78;
 }

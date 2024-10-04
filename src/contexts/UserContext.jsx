@@ -14,6 +14,8 @@ export const UserProvider = ({ children }) => {
         const contactsUrl = `https://boolean-uk-api-server.fly.dev/${myGithubUsername}/contact/`
         const response = await fetch(contactsUrl)
         const jsonData = await response.json()
+        jsonData.map(contact => contact.initials = `${contact.firstName?.charAt(0).toUpperCase()} ${contact.lastName?.charAt(0).toUpperCase()}`)
+
         setContacts(jsonData)
     }
 

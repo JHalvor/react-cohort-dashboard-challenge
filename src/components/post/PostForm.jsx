@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useUser } from '../../contexts/UserContext'
 import { usePost } from '../../contexts/PostContext'
-import Circle from '../InitialsCircle'
 
 export default function PostForm() {
     const { createPost } = usePost()
@@ -28,20 +27,24 @@ export default function PostForm() {
 
     return (
         <form className="post-form" onSubmit={handleSubmit}>
-            <Circle color={loggedInUser.favouriteColour}/>
-            <input 
-                name="title"
-                type="text"
-                value={formData.title}
-                onChange={handleChange}
-                placeholder="Title"
-                required/>
-            <textarea 
-                name="content"
-                value={formData.content}
-                onChange={handleChange}
-                placeholder="What's on your mind?"
-                required/>
+            <div className="initials-circle" style={{backgroundColor:loggedInUser.favouriteColour}}>{loggedInUser.initials}</div>
+            <div className="post-text-area">
+                <input 
+                    className="post-title"
+                    name="title"
+                    type="text"
+                    value={formData.title}
+                    onChange={handleChange}
+                    placeholder="Title"
+                    required/>
+                <textarea 
+                    className="post-content"
+                    name="content"
+                    value={formData.content}
+                    onChange={handleChange}
+                    placeholder="What's on your mind?"
+                    required/>
+            </div>
             <button type="submit">Post</button>
         </form>
     )

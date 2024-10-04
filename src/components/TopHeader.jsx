@@ -1,6 +1,5 @@
 import titleHeader from '../assets/title-header.svg'
 import { useUser } from '../contexts/UserContext'
-import Circle from './InitialsCircle'
 
 export default function TopHeader() {
     const { loggedInUser } = useUser()
@@ -11,7 +10,7 @@ export default function TopHeader() {
                 <img src={titleHeader} alt="Title Header Icon" width="356" height="56"/>
             </div>
             <div className="profile-icon">
-                <Circle color={loggedInUser.favouriteColour}/>
+            <div className="initials-circle" style={{backgroundColor:loggedInUser.favouriteColour}}>{loggedInUser.initials}</div>
             </div>
         </div>
     )

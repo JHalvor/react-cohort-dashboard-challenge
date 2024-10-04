@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useUser } from "../contexts/UserContext"
 import { Link } from 'react-router-dom'
-import Circle from './InitialsCircle'
 
 export default function AuthorDetails({ authorId }) {
-    const { loggedInUser, contacts } = useUser()
+    const { contacts } = useUser()
     const [author, setAuthor] = useState({})
 
     useEffect(() => {
@@ -15,8 +14,8 @@ export default function AuthorDetails({ authorId }) {
 
     return (
         <div className="author-details">
-            <Link to={`/profile/${author.id}`}>
-                <Circle color={author.favouriteColour}/>
+            <Link to={`/profile/${author.id}`} className="author-link">
+                <div className="initials-circle" style={{backgroundColor:author.favouriteColour}}>{author.initials}</div>
                 <h4>{author.firstName} {author.lastName}</h4>
             </Link>
         </div>
