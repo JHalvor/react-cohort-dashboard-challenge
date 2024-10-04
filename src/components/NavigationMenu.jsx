@@ -15,7 +15,7 @@ export default function NavigationMenu() {
                 </Link>
             </div>
             <div className="menu-item">
-                <Link to={`/profile/${loggedInUser.id}`}>
+                <Link to={`/profileEdit/${loggedInUser.id}`}>
                     <img src={profileIcon} alt="Profile Icon" />
                     Profile
                 </Link>

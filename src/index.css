@@ -11,20 +11,10 @@
   flex-grow: 1;
 }
 
-.circle {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: green; /* Change the background color as needed */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .circle span {
-  color: white; /* Change the text color as needed */
+  color: white;
   font-size: 18px;
-}
+} 
 
 .navigation-menu {
   background-color: #fff;
@@ -33,22 +23,6 @@
   padding: 1rem 2rem;
 }
 
-.menu-item {
-  margin-bottom: 1rem;
-  a {
-    text-decoration: none;
-    color: #000046;
-    display: flex;
-    align-items: center;
-  }
-
-  .fa-solid {
-    font-size: 1.2rem;
-    margin-right: 1rem;
-  }
-}
-
-/* Home Section Styling */
 .home {
   display: flex;
 }
@@ -59,7 +33,6 @@
   padding: 1rem 2rem;
 }
 
-/* PostFeed Styling */
 .post-feed {
   border: 1px solid #ddd;
   padding: 1rem;
@@ -70,7 +43,6 @@
   color: #64648c;
 }
 
-/* Post Styling */
 .post {
   border-bottom: 1px solid #ddd;
   padding: 1rem;
@@ -86,7 +58,6 @@
   margin-bottom: 1rem;
 }
 
-/* PostForm Styling */
 .post-form {
   display: flex;
   flex-direction: column;
@@ -120,12 +91,10 @@
   background-color: #64dc78;
 }
 
-/* CommentList Styling */
 .comment-list {
   margin-bottom: 1rem;
 }
 
-/* Comment Styling */
 .comment {
   display: flex;
   margin-bottom: 0.5rem;

@@ -1,20 +1,18 @@
 import { useEffect, useState } from 'react'
 import Comment from './Comment'
-import { useUser } from "../../contexts/UserContext"
+import { usePost } from "../../contexts/PostContext"
 
 export default function CommentList({ postId }) {
-    const { username } = useUser()
+    const { fetchComments } = usePost()
     const [comments, setComments] = useState([])
     const [showAllComments, setShowAllComments] = useState(false)
-    const commentsUrl = `https://boolean-uk-api-server.fly.dev/${username}/post/${postId}/comment`
     
     useEffect(() => {
-        const fetchComments = async () => {
-        const response = await fetch(commentsUrl)
-        const jsonData = await response.json()
-        setComments(jsonData)
+        const fetch = async () => {
+            const commentsData = await fetchComments(postId)
+            setComments(commentsData)
         }
-        fetchComments()
+        fetch()
     }, [postId])
 
     const toggleComments = () => {

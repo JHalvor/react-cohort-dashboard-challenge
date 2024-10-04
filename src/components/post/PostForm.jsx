@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { useUser } from '../../contexts/UserContext'
 import { usePost } from '../../contexts/PostContext'
+import Circle from '../InitialsCircle'
 
 export default function PostForm() {
-    const { fetchPosts } = usePost()
-    const { username, loggedInUser, fetchRandomContact } = useUser()
+    const { createPost } = usePost()
+    const { loggedInUser } = useUser()
     const initialState = {
         title: "",
         content: "",
@@ -20,27 +21,14 @@ export default function PostForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        formData.contactId = fetchRandomContact().id
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                title: formData.title, 
-                content: formData.content, 
-                contactId: formData.contactId })
-        }
-
-        await fetch(`https://boolean-uk-api-server.fly.dev/${username}/post`, requestOptions)
+        createPost(formData)
         setFormData(initialState)
-        fetchPosts()
     }
 
     return (
         <form className="post-form" onSubmit={handleSubmit}>
-            <div className="circle">
-                <span>{loggedInUser.initials}</span>
-            </div>
+            <Circle color={loggedInUser.favouriteColour}/>
             <input 
                 name="title"
                 type="text"

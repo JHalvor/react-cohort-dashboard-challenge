@@ -11,19 +11,18 @@ export default function Post({ post }) {
     const [postState, setPostState] = useState(null)
 
     useEffect(() => {
-        posts.forEach((p) => {
-        if (p.id == id) {
-            setPostState(p);
-        }})
+        setPostState(posts.find(post => post.id == id))
     }, [])
     
-    if (postState) {
+    if (postState || post == undefined) {
         post = postState
     }
 
+    if (post == undefined) return <div>Loading...</div>;
+
     return (
         <div className="post">
-            <AuthorDetails contactId={post.contactId} />
+            <AuthorDetails authorId={post.contactId} />
             <div className="post-content">
                 <Link to={`/post/${post.id}`}>
                     <h3>{post.title}</h3>

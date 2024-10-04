@@ -6,51 +6,65 @@ export const useUser = () => {
 };
 
 export const UserProvider = ({ children }) => {
-    const [username] = useState("JHalvor")
+    const myGithubUsername = "JHalvor"
     const [loggedInUser, setLoggedInUser] = useState({})
     const [contacts, setContacts] = useState([])
 
     const fetchContacts = async () => {
-        const contactsUrl = `https://boolean-uk-api-server.fly.dev/${username}/contact/`
+        const contactsUrl = `https://boolean-uk-api-server.fly.dev/${myGithubUsername}/contact/`
         const response = await fetch(contactsUrl)
         const jsonData = await response.json()
         setContacts(jsonData)
     }
 
     const fetchLoggedInUser = async () => {
-        const contactsUrl = `https://boolean-uk-api-server.fly.dev/${username}/contact/`
-        const response = await fetch(contactsUrl)
-        const jsonData = await response.json()
-        const randomContactIndex = getRandomInt(0, jsonData.length)
-        const newLoggedInUser = jsonData[randomContactIndex]
+        const loggedInUserId = 1
+        const loggedInUserUrl = Object.keys(loggedInUser).length <= 0
+            ? `https://boolean-uk-api-server.fly.dev/${myGithubUsername}/contact/${loggedInUserId}`
+            : `https://boolean-uk-api-server.fly.dev/${myGithubUsername}/contact/${loggedInUser.id}`
+
+        const response = await fetch(loggedInUserUrl)
+        const newLoggedInUser = await response.json()
+        
         newLoggedInUser.initials = `${newLoggedInUser.firstName?.charAt(0).toUpperCase()} ${newLoggedInUser.lastName?.charAt(0).toUpperCase()}`
+
+        newLoggedInUser.username = `${newLoggedInUser.firstName?.charAt(0).toUpperCase()}${newLoggedInUser.lastName?.slice(0, newLoggedInUser.lastName?.length)}`
         setLoggedInUser(newLoggedInUser)
     }
 
-    const fetchRandomContact = () => {
-        if (contacts.length <= 0) {
-            fetchContacts()
+    const updateUser = async (userData) => {
+        userData.contactId = loggedInUser.id
+
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                street: userData.street,
+                city: userData.city,
+                gender: userData.gender,
+                email: userData.email,
+                jobTitle: userData.jobTitle,
+                latitude: userData.latitude,
+                longitude: userData.longitude,
+                favouriteColour: userData.favouriteColour,
+                profileImage: userData.profileImage })
         }
-        const randomContactIndex = getRandomInt(0, contacts.length)
-        return contacts[randomContactIndex]
-    }
 
-    const getRandomInt = (min, max) => {
-        const minCeiled = Math.ceil(min);
-        const maxFloored = Math.floor(max);
-        return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)
+        await fetch(`https://boolean-uk-api-server.fly.dev/${myGithubUsername}/contact/${loggedInUser.id}`, requestOptions)
+        fetchLoggedInUser()
     }
-
+    
     return (
         <UserContext.Provider 
             value={{ 
                 contacts: contacts,
-                username: username, 
                 loggedInUser: loggedInUser, 
                 fetchLoggedInUser: fetchLoggedInUser,
                 fetchContacts: fetchContacts,
-                fetchRandomContact: fetchRandomContact
-            }}>
+                updateUser: updateUser
+                }}>
             {children}
         </UserContext.Provider>
     )

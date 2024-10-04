@@ -4,7 +4,7 @@ export default function Comment({ comment }) {
     return (
         <div className="comment">
             <ul>
-                <AuthorDetails contactId={comment.contactId} />
+                <AuthorDetails authorId={comment.contactId} />
                 <p>{comment.content}</p>
             </ul>
         </div>
